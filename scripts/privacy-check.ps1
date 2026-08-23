@@ -27,4 +27,4 @@ foreach ($pattern in $patterns) {
 }
 
 Write-Output 'Privacy check passed: no private strategy/config paths or credential patterns are tracked.'
-
+exit 0

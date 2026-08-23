@@ -10,7 +10,9 @@
 
 ## M2 - Binance shadow mode
 
-- WebSocket market and user-data streams.
+- USD-M user-data stream: routed private endpoint, listen-key renewal, ping/pong,
+  reconnect backoff and owned-order event parsing are implemented and unit tested.
+- Market candle stream and account-position event parsing remain pending.
 - Complete symbol metadata/precision and position reconciliation.
 - Run beside CK Quant without submitting orders; compare every signal, leverage,
   exit reason and intended price.
@@ -30,4 +32,3 @@
 - FreqAI-equivalent ML integration as an optional service.
 
 “Complete Freqtrade replacement” is the M4 outcome, not the M1 label.
-

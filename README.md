@@ -31,10 +31,11 @@ ck-quant-rust serve --config config.example.json --listen 127.0.0.1:8080
 ck-quant-rust backtest --config config.example.json --candles candles.csv --pair BTC/USDT:USDT
 ```
 
-`serve` is paper-only in milestone 1. Live Binance order submission exists as a
-connector module but remains deliberately disabled in the CLI until user-data
-WebSocket reconciliation, exchange filters, precision handling, clock drift,
-liquidation protection and failover tests all pass.
+`serve` is paper-only in milestone 1. Live Binance order submission and the
+2026 routed user-data WebSocket exist as connector modules but remain
+deliberately disabled in the CLI until account-position reconciliation,
+exchange filters, precision handling, clock drift, liquidation protection and
+failover tests all pass.
 
 ## Why a rewrite does not automatically remove a 30-second delay
 
@@ -50,4 +51,3 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and
 
 GPL-3.0-only. This implementation uses documented behavior and public APIs; it
 does not copy the private CK_Trend source into public artifacts.
-
