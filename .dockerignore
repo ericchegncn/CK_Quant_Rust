@@ -1,0 +1,16 @@
+.git
+.github
+target
+.env
+private
+user_data
+secrets
+data
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+config*.json
+!config.example.json
+**/CK_Trend*
+

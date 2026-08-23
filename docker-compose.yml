@@ -1,0 +1,14 @@
+services:
+  ck_quant_rust:
+    build: .
+    image: ericchegncn/ck_quant_rust:dev
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8088:8080"
+    volumes:
+      - ./user_data:/app/user_data
+      - ./config.json:/app/config.json:ro
+    command: ["serve", "--config", "/app/config.json"]
+    environment:
+      RUST_LOG: ck_quant_rust=info
+

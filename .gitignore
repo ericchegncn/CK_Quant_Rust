@@ -1,0 +1,20 @@
+/target/
+/.env
+/.idea/
+/.vscode/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.log
+
+# Never publish private strategies, real configs, credentials, or market data.
+/private/
+/user_data/
+/secrets/
+/data/
+config*.json
+!config.example.json
+**/CK_Trend*.rs
+**/CK_Trend*.py
+

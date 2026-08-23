@@ -1,0 +1,20 @@
+{
+  "dry_run": true,
+  "trading_mode": "futures",
+  "margin_mode": "isolated",
+  "stake_currency": "USDT",
+  "stake_amount": 10.0,
+  "max_open_trades": 5,
+  "timeframe": "15m",
+  "internals": {
+    "process_throttle_secs": 1
+  },
+  "exchange": {
+    "name": "binance",
+    "key": "",
+    "secret": "",
+    "pair_whitelist": ["BTC/USDT:USDT", "ETH/USDT:USDT"]
+  },
+  "database_url": "sqlite://user_data/trades.sqlite"
+}
+
