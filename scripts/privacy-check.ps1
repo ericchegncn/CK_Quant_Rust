@@ -20,7 +20,9 @@ $patterns = @(
 )
 
 foreach ($pattern in $patterns) {
-    $matches = git -C $root grep -n -I -E $pattern -- . 2>$null
+    # `-e` prevents patterns beginning with hyphens (for example PEM headers)
+    # from being parsed as git-grep command options.
+    $matches = git -C $root grep -n -I -E -e $pattern -- . ':(exclude)scripts/privacy-check.ps1' 2>$null
     if ($LASTEXITCODE -eq 0 -and $matches) {
         throw "Possible credential matched '$pattern':`n$matches"
     }

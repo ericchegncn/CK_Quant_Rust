@@ -18,10 +18,20 @@ The Tokio event loop uses biased selection. Risk exits are serviced before
 strategy orders, and strategy orders before background work. Each order carries
 a UUID client ID so a retry cannot silently create a duplicate position.
 
-SQLite runs in WAL mode with an index on `(status, pair, updated_at)`. The live
-loop never scans closed historical orders. PostgreSQL can be added for fleets,
-but SQLite remains suitable for a single bot when writes are serialized and
-queries are bounded.
+SQLite runs in WAL mode, but WAL alone is not the isolation boundary. Active
+orders/checkpoints live in the configured database while terminal orders are
+moved to a physically separate `*.history.sqlite` database. The trading loop
+therefore queries a table bounded by current activity, not lifetime activity.
+Dashboard, export and analytical queries must use the history database or an
+incrementally maintained `account_stats` snapshot and must never run on a risk
+or strategy lane. PostgreSQL can be added for fleets, but split SQLite remains
+suitable for one bot when writes are serialized and queries are bounded.
+
+This is a hard performance invariant: increasing terminal history from ten
+thousand to one million records must not materially increase single-order
+submission or persistence latency. CI verifies that terminal orders leave the
+active database; release benchmarking will enforce P50/P95/P99 latency at
+multiple history sizes.
 
 ## Compatibility boundary
 
@@ -45,4 +55,5 @@ A live build is blocked until all of these are verified:
 8. Crash recovery and duplicate-order fault injection.
 9. P99 risk-order submission below 2 seconds under a synthetic burst.
 10. Dry-run and shadow-mode parity against CK Quant on identical candles.
-
+11. History-scaling test at 10k, 100k and 1m terminal orders with no material
+    regression in the active order path.

@@ -6,6 +6,8 @@
 - Domain model, strategy trait, sample strategy and basic CSV runner.
 - Three priority lanes with risk-first scheduling.
 - Paper exchange, Binance signed order connector, SQLite WAL storage.
+- Physically split active/history SQLite stores so lifetime order growth cannot
+  enter the submission, exit or reconciliation hot path.
 - Health API, Docker build, tests and privacy guard.
 
 ## M2 - Binance shadow mode
